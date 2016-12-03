@@ -8,9 +8,9 @@ using OptionsMeter.Models;
 
 namespace OptionsMeter.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class WebAdminDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public WebAdminDbContext(DbContextOptions<WebAdminDbContext> options)
             : base(options)
         {
         }
@@ -21,6 +21,8 @@ namespace OptionsMeter.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+
+            builder.ConfigureApplicationUser();
         }
     }
 }

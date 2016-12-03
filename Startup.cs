@@ -40,11 +40,16 @@ namespace OptionsMeter
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            // services.AddDbContext<ApplicationDbContext>(options =>
+            //     options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<WebAdminDbContext>(opts =>
+            {
+                string connectionString = Configuration.GetConnectionString("WebAdminConnection");
+                opts.UseNpgsql(connectionString);
+            });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<WebAdminDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
