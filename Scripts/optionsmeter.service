@@ -1,0 +1,21 @@
+[Unit]
+  Description=The www.optionsmeter.com website
+
+[Service]
+  User=optionsmeter
+  Group=optionsmeter
+  Nice=5
+  KillMode=control-group
+  SuccessExitStatus=0 1
+  Restart=always
+  RestartSec=10                                          # Restart service after 10 seconds if dotnet service crashes
+  SyslogIdentifier=optionsmeter
+  Environment=ASPNETCORE_ENVIRONMENT=Production
+  NoNewPrivileges=true
+  PrivateTmp=true
+  ReadWriteDirectories=/var/aspnet/OptionsMeter
+  WorkingDirectory=/var/aspnet/OptionsMeter/web
+  ExecStart=/usr/local/bin/dotnet OptionsMeter.dll
+
+  [Install]
+  WantedBy=multi-user.target
